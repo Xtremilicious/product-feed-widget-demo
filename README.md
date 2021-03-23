@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+**Product Feed Widget** - Swym Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Problem Statement: The coding assignment is to build a configurable widget plugin that renders based on a given e-commerce catalogue. This widget can be used outside the e-commerce site, like a blog or an email for a given e-commerce store context rendering a product catalogue as a feed within that page. The goal is to make this widget easily embeddable and configurable with minimum steps involved.
 
-## Available Scripts
+Primary dimensions to think along:
+1. Allow the user to specify a set of products on each render of the widget.
+*Eg: If it is on the blog-page-1, it refers to product-set-1. On blog-page-2, it refers to* product-set-2.
+2. Allow the user to configure fields visible/hidden on each product tile (eg: title, price, image, etc.)
+3. Allow the user to configure actions available on each product tile (eg: buy now, view now, etc.)
+4. Allow the user to “skin” the widget
 
-In the project directory, you can run:
+**Solution** - Documentation
 
-### `yarn start`
+Product Feed Widget Features:
+1. Specify a definite set of products to display.
+2. Control visibility toggles for the product `title`, `vendor`, `image` and `price`.
+3. Control actions invoked for the "Buying/Add to Cart", "View Product", and "Favourite/Like Product".
+4. Pass custom styles to change the overall look and feel of the widget items. (currently tested the `background` and `color` attributes)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Demo**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Getting Started**
+Product Feed Widget depends on `react-icons` for rendering like/buy icons in the products.
 
-### `yarn test`
+The Widget lies in the `Widget/Feed` folder in the `src` directory.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Usage**
 
-### `yarn build`
+    import FeedWidget from "./Widgets/Feed";
+    function MyApp() {
+    
+      //specific set of products as array of objects
+      const [items, setItems] = useState([]);
+      
+      //custom styles
+	  const customStyle = {
+      background: "",
+      color: "",
+      };
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+	  //dummy functions to control the actions (buy, like, view)
+	  const dummyAlertBuy = (id) => {
+	      alert("Buy Product ID " + id);
+      };
+      const dummyAlertView = (id) => {
+		  alert("View Product ID " + id);
+	  };
+	  const dummyAlertLike = (id) => {
+		  alert("Like Product ID " + id);
+	  };
+    
+	  //title, price, image, vendor can be toggled true/false
+      return (
+        <div>
+          <FeedWidget
+            products={items}
+            title={true}
+            price={true}
+            image={true}
+            vendor={true}
+            style={customStyle}
+            onBuy={dummyAlertBuy}
+            onView={dummyAlertView}
+            onLike={dummyAlertLike}
+          />
+        </div>
+      );
+    }
+**User Guide:**
+**Props:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Prop name                   | Description                                                                                                                                                | Default value (when the specific prop is not passed)                                                             | Example values                                                                                                            |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| products                    | Takes in an array of objects to use for the feed of products                                                                                               | []                                                                         | Array of objects with specific attributes.<br> Check out `data.json` file in `public/api`                                 |
+| title, price, vendor, image | Toggle visibility of product attributes                                                                                                                    | `true`                                                                     | `true` for enabled, `false` for disabled                                                                                  |
+| style                       | Add custom styling to product cards                                                                                                                        | {}                                                                         | Object with js style attributes. <br> `{ background: "black", color: "white"}`                                                     |
+| onBuy, OnView, OnLike       | Takes in custom action functions to invoke when the user clicks on the Buy (+ icon), View (click on product image or title), Like actions (click on heart icon) | An alert function with an alert "No action configured for this product ID" | Any custom function that takes in an `id` atribute which the product calls it with. <br> e.g. `function(id){console.log(id)}` |

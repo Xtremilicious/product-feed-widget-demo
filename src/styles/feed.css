@@ -1,0 +1,97 @@
+.feed-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 3vw;
+}
+
+.product-container {
+  position: relative;
+  background-color: white;
+  transition: 0.5s;
+  border-radius: 2vh;
+  border: 1px solid #e6e6e6;
+  overflow: hidden;
+}
+.product-container:hover {
+  box-shadow: rgb(0 0 0 / 10%) 0px 1px 7px;
+}
+
+.meta-info {
+  padding: 2vh;
+}
+
+.product-image-container {
+  height: 40vh;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.product-image:hover {
+  transform: scale(1.05);
+}
+
+.product-title {
+  font-size: 2.8vh;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.product-vendor {
+  font-size: 2.5vh;
+  font-weight: 350;
+  color: #848484;
+}
+.product-price {
+  padding-top: 1vh;
+  color: #4bb368;
+  font-size: 2.5vh;
+  font-weight: 500;
+}
+
+.product-action {
+  display: flex;
+  align-items: center;
+}
+
+.product-call-to-action {
+  margin-left: auto;
+  background: #4bb368;
+  padding: 1.5vh;
+  border-radius: 2vh 0 2vh 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.favourite {
+  position: absolute;
+  top: 1.5vh;
+  right: 1.5vh;
+  cursor: pointer;
+}
+
+.favourite-icon {
+  color: red;
+  transition: 0.5s;
+}
+
+.favourite-icon:hover {
+  transform: scale(1.2);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .feed-container {
+    grid-template-columns: 1fr;
+    grid-row-gap: 4vh;
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-column-gap: 2vh;
+  }
+}
