@@ -24,6 +24,7 @@ Deployed Demo: https://product-feed-widget-demo.vercel.app
 Mock Data API: https://product-feed-widget-demo.vercel.app/api/data.json
 
 **Getting Started**
+
 Product Feed Widget depends on `react-icons` for rendering like/buy icons in the products.
 
 The Widget lies in the `Widget/Feed` folder in the `src` directory.
