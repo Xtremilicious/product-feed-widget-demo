@@ -2,7 +2,6 @@ import React from "react";
 import "../../../styles/feed.css";
 import { IconContext } from "react-icons";
 import { FaPlus, FaHeart, FaRegHeart } from "react-icons/fa";
-const style = {};
 
 export default function Product({
   productData,
